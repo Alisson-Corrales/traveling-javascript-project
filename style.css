@@ -1,0 +1,34 @@
+
+
+html{
+    background-color: cornsilk;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body{
+    margin: 4rem;
+}
+
+ul{
+    text-align: center;
+    max-width: 25em;
+    background-color: #8fb9e3;
+    padding: 1em;
+    border-radius: 5%;
+}
+
+li{
+    list-style-type: none;
+    padding: .5rem;
+}
+
+input{
+    margin: 5px;
+
+}
+
+.medicCon{
+    padding: 3.5rem;
+    width: 5rem;
+    height: .5rem;
+}
