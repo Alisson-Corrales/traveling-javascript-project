@@ -15,21 +15,26 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
+    <header>
+        <div>filler</div>
+        <div>filler</div>
+    </header>
     <ul>
         <h1>Passenger Form</h1>
 
-        <li> Full Name <input type="textbox" class="names" placeholder="Jane Doe"></li>
+        <p>* is required</p>
+
+        <li>*Full Name<input type="textbox" id="names" placeholder="Jane Doe"></li>
          
-        <li>Date of Birth? <input type="textbox" class="DOB" placeholder="MM/DD/YYYY"></li>
+        <li>*Date of Birth? <input type="date" id="DOB" placeholder="MM/DD/YYYY"></li>
 
-        <li>Departing Location <input type="textbox" class="date" placeholder="City, State (Beehive, Texas)"></li>
-        <li>Arriving Location<input type="textbox" class="date" placeholder="City, State (Beehive, Texas)"></li>
+        <li>*Departing Location <input type="textbox" class="date" id="leavingLocation" placeholder="City, State (Beehive, TX)"></li>
+        <li>*Arriving Location<input type="textbox" class="date" id="arrivingLocation" placeholder="City, State (Beehive, TX)"></li>
 
-        <li>Departing Date <input type="textbox" class="date" placeholder="MM/DD/YYYY"></li>
-        <li>Arrival Date<input type="textbox" class="date" placeholder="MM/DD/YYYY"></li>
+        <li>*Departing Date <input onclick="" type="date"" class="date" id="leavingDate" placeholder="MM/DD/YYYY"></li>
+        <li>*Arrival Date<input onclick="" type="date" class="date"id="arrivingDate" placeholder="MM/DD/YYYY"></li>
 
-        <li>Amount of Luggage<input type="textbox" class="luggageNum" placeholder="#"></li>
+        <li>Amount of Luggage<input type="textbox" class="luggageNum" id="" placeholder="#"></li>
 
         <li>
             <div>Type of meal?</div>
@@ -40,8 +45,14 @@
 
         <li>
             <div>Pick extras (+10 USD each)</div>
+            <div>Window seat<input type="radio" class="extraOpts" name="extras"></div>
+            <div>A bucket<input type="radio" class="extraOpts" name="extras"></div>
+            <div>"Free" raccoon<input type="radio" class="extraOpts" name="extras"></div>
         </li>
+
+        <li><button onclick="submitInfo()">Submit</button></li>
     </ul>
+
 </body>
 
 </html>
