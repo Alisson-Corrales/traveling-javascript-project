@@ -1,30 +1,45 @@
 "use strict";
 
+function checkbox(){
+    let extras = document.getElementsByName("extra");
+    let extraArray = [];
+    for(let i = 0; i < extras.length; i++){
+        if(extras[i].checked){
+            extraArray.push(extras[i].value);
+        }
+    }
+    return extraArray.join(", ")
+}
+
 //this holds all the info you give
 class User{
-    constructor(firstName, lastName, DoB, departing, arriving, leaveDate, returnDate, chick, fish, veg, legroom, window, headphones, moreFood){
+    constructor(firstName, lastName, Id, DoB, departing, arriving, leaveDate, returnDate, meal){
         this.firstName = firstName;
         this.lastName = lastName;
+        this.Id = Id;
         this.DoB = DoB;
         this.departing = departing;
         this.arriving = arriving;
         this.leaveDate = leaveDate;
         this.returnDate = returnDate;
         this.bags = bags;
-        this.chick = chick;
-        this.fish = fish;
-        this.veg = veg;
-        this.legroom = legroom;
-        this.window = window;
-        this.headphones = headphones;
-        this.moreFood = moreFood;
+        this.meal = meal;
+        this.extras = checkbox();
     }
 }
 
 
-let ID = 1987;
+
+let userId = 1987;
 //array for holding values
-let userList = [("Ludwig", "Van Pelt", "1/12/1890", 1986, ""), ("Mickard", "Mundy", "2/25/2001", 1935, "")]; //array with users
+let userList = []
+let user = ("Ludwig", "Van Pelt", 1987, "1-12-1890", "Huttsburg, Germany", "Teufort, NM", "4-18-1960", "4-20-1960", "chick") 
+userList.push(user);
+
+user = ("Mickard", "Mundy", 1936, "2-25-2001", "Victoria, Australia", "Teufort, NM", "4-18-1960", "4-18-1960", "fish"); //array with users
+userList.push(user);
+
+console.log(userList)
 
 //this adds the inputted info
 function addToList(){
@@ -41,8 +56,14 @@ function addToList(){
     let veg = document.getElementById("veg").value;
     let legroom = document.getElementById("legroom").value;
     let window = document.getElementById("window").value;
+    let headphones = document.getElementById("headphones").value;
+    let moreFood = document.getElementById("moreFood").value;
 
-    let passenger = new User(firstName, lastName, DoB, departing, arriving, leaveDate, returnDate, bags, chick, fish, veg, legroom, window); //the new user
+    userId++;
+
+    let passenger = new User(firstName, lastName, userId, DoB, departing, arriving, leaveDate, returnDate, bags, chick, fish, veg, legroom, window, headphones, moreFood); //the new user
+
+    userList.push(passenger);
 
     document.getElementById("firstName").value = ""; //this makes the place where you input empty
     document.getElementById("lastName").value = "";
@@ -52,9 +73,33 @@ function addToList(){
     document.getElementById("leaveDate").value = "";
     document.getElementById("returnDate").value = "";
     document.getElementById("bags").value = "";
-    document.getElementById("chick").value = "";
-    document.getElementById("fish").value = "";
-    document.getElementById("veg").value = "";
-    document.getElementById("legroom").value = "";
-    document.getElementById("window").value = "";
+    document.getElementById("chick").checked = true;
+    document.getElementById("fish").checked = false;
+    document.getElementById("veg").checked = false;
+    document.getElementById("legroom").checked = false;
+    document.getElementById("window").checked = false;
+    document.getElementById("headphones").checked = false;
+    document.getElementById("moreFood").checked = false;
+
+    console.log(passenger);
+}
+
+
+function print(){
+    let names = document.getElementById("names");
+
+    names.innerHTML = "";
+    for(let i = 0; i < userList.length; i++){
+        names.innerHTML += 
+        `<div> ${userList[i].firstName} ${userList[i].lastName} ${userList[i].Id} </div>`;
+    }
+}
+
+
+function updateList(){
+    name = document.getElementById("updateList");
+
+
+
+
 }

@@ -98,35 +98,43 @@
             </select>
             <button onclick="print()" id="print">Print All Names</button>
         </div>
+
         <div class="col">
             <label for="firstName">First Name</label>
             <input type="text" id="outfirstName" placeholder="First Name">
+
             <label for="lastName" style="margin-left: 10px;">Last Name</label>
             <input type="text" id="outlastName" placeholder="Last Name">
         </div>
+        
         <div class="col">
             <label for="DoB">Date of Birth</label>
             <input type="date" id="outDoB" placeholder="MM/DD/YYYY">
             <label for="bags" class="bags" style="margin-left: 10px">Bags</label>
             <input type="number" class="bags" name="bags" id="outbags" placeholder="#">
         </div>
+        
         <div class="row">
             <label for="departing">Departing*</label>
             <input style="margin-left: 10px" type="text" id="outdeparting" placeholder="City, State (Phoenix, AZ)">
         </div>
+        
         <div class="row">
             <label for="arriving">Arrivaling*</label>
             <input style="margin-left: 10px" type="text" id="outarriving" placeholder="City, State (Atlanta, GA)">
         </div>
+        
         <div class="row">
             <label for="leaveDate">Date leaving</label>
             <input type="date" name="leaveDate" id="outleaveDate" placeholder="MM/DD/YYYY">
             <label for="returnDate" style="margin-left: 10px">Date Returning</label>
             <input type="date" name="returnDate" id="outreturnDate" placeholder="MM/DD/YYYY">
         </div>
+
         <div class="row" style="margin-top: 10px;">
             <p style="margin-right: 10px; width: 120px;">Trip Duration:</p>
             <p style="width:75px;" id="outdurration" type="text">
+
             <p>Meal:</p>
             <input style="width: 150px;" id="outmeal" type="text">
             <p style="margin-left: 20px; margin-right: 10px;">Age:</p>
@@ -139,10 +147,12 @@
             <p style="margin-left: 20px;">Cost:</p>
             <p id="outcost" style="margin-left: 10px;">$300</p>
         </div>
+
         <button onclick="updateList()">Submit Changes</button>
+
         <div id="success"></div>
         <div id="names">
-            
+
         </div>
  
     </div>
