@@ -116,7 +116,9 @@ input {
 }
  
 button {
-    font-size: larger;
+    font-size: large;
+    padding: 10px;
+    padding-top: .5px;
     color: white;
     background: rgb(60, 149, 184);
 }
