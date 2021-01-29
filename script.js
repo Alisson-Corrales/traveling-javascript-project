@@ -1,20 +1,20 @@
 "use strict";
 
 //this goes through the Extras checkboxes and
-function checkbox(){
-    let extras = document.getElementsByName("extra");
+function checkbox(name) {
+    let extras = document.getElementsByName(name);
     let extraArray = [];
-    for(let i = 0; i < extras.length; i++){
-        if(extras[i].checked){
+    for (let i = 0; i < extras.length; i++) {
+        if (extras[i].checked) {
             extraArray.push(extras[i].value);
         }
     }
-    return extraArray.join(", ")
+    return extraArray
 }
 
 //this holds all the info you give
-class User{
-    constructor(firstName, lastName, Id, DoB, departing, arriving, leaveDate, returnDate, bags, meal){
+class User {
+    constructor(firstName, lastName, Id, DoB, departing, arriving, leaveDate, returnDate, bags, meal, extras) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.Id = Id;
@@ -25,7 +25,48 @@ class User{
         this.returnDate = returnDate;
         this.bags = bags;
         this.meal = meal;
-        this.extras = checkbox();
+        this.extras = extras;
+    }
+
+    formatDate(date){
+        console.log(date);
+        date = new Date(date);
+        let year = date.getFullYear();
+        let month = date.getMonth() + 1;
+        let day = date.getDate();
+
+        if(month < 10){
+            month = "0" + month;
+        }
+        if(day < 10){
+            day = "0" + day;
+        }
+        return `${year}-${month}-${day}`
+    }
+
+    getAge(){
+        let DoB = this.DoB.getTime();
+        let today = Date.now();
+        let age = Math.floor((today - DoB)/(1000 * 60 * 60 * 24 * 365.25));
+        return age;
+    }
+
+    getDurration(){
+        let leaveDate = this.leaveDate;
+        let returnDate = this.returnDate;
+        let durration = Math.floor((returnDate - leaveDate)/(1000 * 60 * 60 * 24));
+        return durration;
+    }
+
+    getCost(){
+        let price = 300;
+        let extras = this.extras;
+        let add = 0;
+        if(extras.value == true){
+            add = add + 10;
+        }
+        let finalPrice = Math.floor((price + add));
+        return finalPrice;
     }
 }
 
@@ -34,39 +75,42 @@ class User{
 let userId = 1987;
 //array for holding users, empty for our convenience
 let userList = []
-let user = new User("Ludwig", "Van Pelt", "1987", "1-12-1890", "Huttsburg, Germany", "Teufort, NM", "4-18-1960", "4-20-1960", 3, "chick") 
+let user = new User("Ludwig", "Van-Pelt", "1987", "1-12-1890", "Huttsburg, Germany", "Teufort, NM", "4-18-1960", "4-20-1960", 3, ["chick"], [""])
 userList.push(user);
 
-user = new User ("Mickard", "Mundy", "1936", "2-25-2001", "Victoria, Australia", "Teufort, NM", "4-18-1960", "4-18-1960", 1, "fish");
+user = new User("Mickard", "Mundy", "1936", "2-25-2001", "Victoria, Australia", "Teufort, NM", "4-18-2000", "4-20-2000", 1, ["fish"], [""]);
 userList.push(user);
 
-console.log(userList)
+console.log(userList);
 
 
 
 //this adds the inputted info
-function addToList(){
-    //this takes the value in the input and puts it in the new user
-    let firstName = document.getElementById("firstName").value; 
+function addToList() {    //this takes the value in the input and puts it in the new user
+    let firstName = document.getElementById("firstName").value;
     let lastName = document.getElementById("lastName").value;
     let DoB = document.getElementById("DoB").value;
+    DoB = new Date(DoB);
+    DoB = DoB.getTime()+(1000 * 60 * 60 * 7);
+    DoB = new Date(DoB);
     let departing = document.getElementById("departing").value;
     let arriving = document.getElementById("arriving").value;
     let leaveDate = document.getElementById("leaveDate").value;
+    leaveDate = new Date(leaveDate);
+    leaveDate = leaveDate.getTime()+(1000 * 60 * 60 * 7);
+    leaveDate = new Date(leaveDate);
     let returnDate = document.getElementById("returnDate").value;
+    returnDate = new Date(returnDate);
+    returnDate = returnDate.getTime()+(1000 * 60 * 60 * 7);
+    returnDate = new Date(returnDate);
     let bags = document.getElementById("bags").value;
-    let chick = document.getElementById("chick").value;
-    let fish = document.getElementById("fish").value;
-    let veg = document.getElementById("veg").value;
-    let legroom = document.getElementById("legroom").value;
-    let window = document.getElementById("window").value;
-    let headphones = document.getElementById("headphones").value;
-    let moreFood = document.getElementById("moreFood").value;
+    let meal = checkbox('meal').join(", ");
+    let extras = checkbox('extra').join(", ")
 
     userId++;
 
     //the user's info
-    let passenger = new User(firstName, lastName, userId, DoB, departing, arriving, leaveDate, returnDate, bags, chick, fish, veg, legroom, window, headphones, moreFood); //the new user
+    let passenger = new User(firstName, lastName, userId, DoB, departing, arriving, leaveDate, returnDate, bags, meal, extras); //the new user
 
     userList.push(passenger);
 
@@ -88,42 +132,21 @@ function addToList(){
     document.getElementById("moreFood").checked = false;
 
     console.log(passenger);
-
-    let outdurration = leaveDate - returnDate;
-    
-    let cost = 300
-    if(checkbox.value = true){
-        cost +10;
-    }
-    document.getElementById("outfirstName").value = firstName;
-    document.getElementById("outlastName").value = lastName;
-    document.getElementById("outDoB").value = DoB;
-    document.getElementById("outbags").value = bags;
-    document.getElementById("outdeparting").value = departing;
-    document.getElementById("outarriving").value = arriving;
-    document.getElementById("outleaveDate").value = leaveDate;
-    document.getElementById("outreturnDate").value = returnDate;
-    document.getElementById("outdurration").value = outdurration;
-    //document.getElementById("outmeal").value = ;
-    //document.getElementById("outage").value = ;
-    //document.getElementById("outextras").value = ;
-    document.getElementById("outcost").value = cost;
 }
-
 
 function print(){
     let names = document.getElementById("names");
 
     names.innerHTML = "";
-    for(let i = 0; i < userList.length; i++){
-        names.innerHTML += 
-        `<div> ${userList[i].firstName} ${userList[i].lastName} ${userList[i].Id} </div>`;
+    for (let i = 0; i < userList.length; i++) {
+        names.innerHTML +=
+            `<div> ${userList[i].firstName} ${userList[i].lastName} ${userList[i].Id} </div>`;
     }
 }
 
 
 //should update the same user
-function updateList(){
+function updateList() {
     name = document.getElementById("updateList");
 
     let outfirstName = document.getElementById("");
@@ -144,17 +167,26 @@ function updateList(){
 }
 
 
-function search(){
-    let options = document.getEle.value;
-    let users = userList.length;
-    let input = document.getElementById("").value
-    input = input.toLowerCase();
+function search() {
+    let name = document.getElementById("search").value;
+    name = name.split(" ");
 
-    for(i = 0; i < x[i].length; i++){
-        if(users[i].innerHTML.includes(input)){
-            document.getElementById("name").;
+    for (let i = 0; i < userList.length; i++) {
+        if (userList[i].firstName == name[0] && userList[i].lastName == name[1]) {
+            let user = userList[i];
+
+            document.getElementById("outfirstName").value = user.firstName;
+            document.getElementById("outlastName").value = user.lastName;
+            document.getElementById("outDoB").value = user.formatDate(user.DoB);
+            document.getElementById("outbags").value = user.bags;
+            document.getElementById("outdeparting").value = user.departing;
+            document.getElementById("outarriving").value = user.arriving;
+            document.getElementById("outleaveDate").value = user.formatDate(user.leaveDate);
+            document.getElementById("outreturnDate").value = user.formatDate(user.returnDate);
+            document.getElementById("outdurration").textContent = user.getDurration();
+            document.getElementById("outmeal").value = user.meal;
+            document.getElementById("outage").textContent = user.getAge();
+            document.getElementById("outextras").value = user.extras;
+            document.getElementById("outcost").textContent = user.getCost();
         }
-
-    for()
-    }
-}
+}}
